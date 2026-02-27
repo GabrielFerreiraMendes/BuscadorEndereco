@@ -1,0 +1,12 @@
+unit endereco.controller;
+
+interface
+
+type
+  TEnderecoController = class
+
+  end;
+
+implementation
+
+end.

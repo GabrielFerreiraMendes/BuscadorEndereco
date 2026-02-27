@@ -1,0 +1,22 @@
+unit endereco.controller;
+
+interface
+
+uses
+  endereco.model, endereco.dto;
+
+type
+  TEnderecoController = class
+  class function ConsultaEndereco(Cep:String): TEndereco;
+  end;
+
+implementation
+
+{ TEnderecoController }
+
+class function TEnderecoController.ConsultaEndereco(Cep: String): TEndereco;
+begin
+  Result := TEndereco.ConsultarEndereco(Cep);
+end;
+
+end.

@@ -1,0 +1,38 @@
+unit principal.view;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    GroupBox1: TGroupBox;
+    edtUf: TEdit;
+    GroupBox2: TGroupBox;
+    edtCep: TMaskEdit;
+    GroupBox3: TGroupBox;
+    edtLogradouro: TEdit;
+    GroupBox4: TGroupBox;
+    edtComplemento: TEdit;
+    GroupBox5: TGroupBox;
+    edtBairro: TEdit;
+    btnSalvar: TButton;
+    GroupBox7: TGroupBox;
+    edtLocalidade: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.

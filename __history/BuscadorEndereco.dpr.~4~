@@ -1,0 +1,17 @@
+program BuscadorEndereco;
+
+uses
+  Vcl.Forms,
+  endereco.view in 'view\endereco.view.pas' {Form1},
+  endereco.model in 'model\endereco.model.pas',
+  endereco.controller in 'controller\endereco.controller.pas',
+  endereco in 'dto\endereco.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

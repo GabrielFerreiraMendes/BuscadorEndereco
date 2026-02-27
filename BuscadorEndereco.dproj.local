@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/10/03 12:23:53.000.881,=C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/11/08 16:17:46.000.561,=C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/02/27 14:16:13.000.173,=C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/02/27 14:22:55.000.950,C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\view\principal.view.dfm</Transaction>
+    <Transaction>2026/02/27 14:22:55.000.950,C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\view\principal.view.pas</Transaction>
+    <Transaction>2026/02/27 14:23:11.000.340,C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\BuscadorEndereco.dproj</Transaction>
+    <Transaction>2026/02/27 14:23:38.000.339,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/02/27 14:36:58.000.132,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\model\endereco.model.pas</Transaction>
+    <Transaction>2026/02/27 14:46:40.000.436,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/02/27 14:50:31.000.307,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\controller\endereco.controller.pas</Transaction>
+    <Transaction>2026/02/27 15:01:48.000.434,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/02/27 15:02:42.000.153,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\dto\endereco.dto.pas</Transaction>
+  </Transactions>
+</BorlandProject>
