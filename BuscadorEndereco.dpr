@@ -5,7 +5,9 @@ uses
   endereco.view in 'view\endereco.view.pas' {Form1},
   endereco.model in 'model\endereco.model.pas',
   endereco.controller in 'controller\endereco.controller.pas',
-  endereco.dto in 'dto\endereco.dto.pas';
+  endereco.dto in 'dto\endereco.dto.pas',
+  viacep.model in 'model\viacep.model.pas',
+  apicep.model in 'model\apicep.model.pas';
 
 {$R *.res}
 

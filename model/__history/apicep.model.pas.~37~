@@ -1,0 +1,47 @@
+unit apicep.model;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants,
+  REST.Types, REST.Client, REST.Json, endereco.dto, System.Net.HttpClient,
+  System.Net.URLClient, System.Net.HttpClientComponent, System.MaskUtils;
+
+type
+  TVApiCepModel = class
+    class function Consultar(Cep: String): TEndereco;
+  end;
+
+implementation
+
+{ TViaCepModel }
+
+class function TVApiCepModel.Consultar(Cep: String): TEndereco;
+const
+  URL_CEP: String = 'https://cdn.apicep.com/file/apicep/{cep}.json';
+  TIPO_JSON: String = 'application/json';
+var
+  Client: TNetHTTPClient;
+  Response: IHTTPResponse;
+  JSONValue: TJSONValue;
+begin
+  Client := TNetHTTPClient.Create(nil);
+
+  try
+    Client.UserAgent := 'BuscadorEndereco/1.0 (Windows NT 10.0)';
+    Response := Client.Get(URL_CEP.Replace('{cep}', FormatMaskText('00000\-000;0;', cep)));
+
+    if Response.StatusCode <> 200 then
+      Exit(nil);
+
+    JSONValue := TJSONObject.ParseJSONValue(Response.ContentAsString);
+    Result := TJson.JsonToObject<TEndereco>(TJSONObject(JSONValue));
+  finally
+    Client := nil;
+    Response := nil;
+    JSONValue := nil;
+  end;
+end;
+
+end.
+

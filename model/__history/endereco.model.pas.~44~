@@ -1,0 +1,64 @@
+unit endereco.model;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants,
+  REST.Types, REST.Client, REST.Json, endereco.dto;
+
+type
+  TEnderecoModel = class(TInterfacedObject)
+    class function ConsultarEndereco(Cep: String): TEndereco;
+  end;
+
+implementation
+
+{ TEndereco }
+
+class function TEnderecoModel.ConsultarEndereco(Cep: String): TEndereco;
+const
+  URL_CEP: String = 'https://viacep.com.br/ws/{cep}/{type}';
+  CT_TP_JSON: String = 'application/json';
+var
+  RESTRequest: TRESTRequest;
+  RESTClient: TRESTClient;
+  RESTResponse: TRESTResponse;
+  JSONRetorno: TJSONObject;
+  Erro:String;
+begin
+  if SameText(Trim(Cep), EmptyStr) then
+    raise Exception.Create('Cep inválido ou em branco!');
+
+  RESTClient := TRESTClient.Create(URL_CEP);
+  RESTResponse := TRESTResponse.Create(nil);
+  RESTResponse.ContentType := CT_TP_JSON;
+  RESTRequest := TRESTRequest.Create(nil);
+
+  try
+    RESTRequest.Client := RESTClient;
+    RESTRequest.Response := RESTResponse;
+    RESTRequest.Method := rmGet;
+    RESTRequest.Params.AddItem('cep', Cep, pkURLSEGMENT, [], ctNone);
+    RESTRequest.Params.AddItem('type', 'json', pkURLSEGMENT, [], ctNone);
+    RESTRequest.Execute;
+
+    if RESTResponse.StatusCode <> 200 then
+      Exit(nil);
+
+    JSONRetorno := RESTResponse.JSONValue as TJSONObject;
+
+    JSONRetorno.TryGetValue<String>('erro', Erro);
+
+    if not Trim(Erro).IsEmpty then
+      Exit(nil);
+
+    Result := TJson.JsonToObject<TEndereco>(JSONRetorno);
+  finally
+    FreeAndNil(RESTClient);
+    FreeAndNil(RESTResponse);
+    FreeAndNil(RESTRequest);
+    JSONRetorno := nil;
+  end;
+end;
+
+end.

@@ -129,6 +129,8 @@
         <DCCReference Include="model\endereco.model.pas"/>
         <DCCReference Include="controller\endereco.controller.pas"/>
         <DCCReference Include="dto\endereco.dto.pas"/>
+        <DCCReference Include="model\viacep.model.pas"/>
+        <DCCReference Include="model\apicep.model.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

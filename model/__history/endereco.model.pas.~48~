@@ -1,0 +1,29 @@
+unit endereco.model;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants,
+  REST.Types, REST.Client, REST.Json, endereco.dto;
+
+type
+  TEnderecoModel = class(TInterfacedObject)
+    class function ConsultarEndereco(Cep: String): TEndereco;
+  end;
+
+implementation
+
+uses
+  viacep.model, apicep.model;
+
+{ TEndereco }
+
+class function TEnderecoModel.ConsultarEndereco(Cep: String): TEndereco;
+begin
+  Result := TViaCepModel.Consultar(Cep);
+
+  if Result = null then
+    Result := TVApiCepModel.Consultar(Cep);
+end;
+
+end.

@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls, endereco.controller, endereco.dto;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls,
+  endereco.controller, endereco.dto, REST.Json;
 
 type
   TForm1 = class(TForm)
@@ -43,11 +44,10 @@ begin
   try
     Endereco := TEnderecoController.ConsultaEndereco(edtCep.Text);
 
-    edtUf.Text := Endereco.UF;
-    edtLogradouro.Text := Endereco.Logradouro;
-    edtComplemento.Text := Endereco.Complemento;
-    edtBairro.Text := Endereco.Bairro;
-    edtLocalidade.Text := Endereco.Localidade;
+    if Endereco = nil then
+      Exit;
+
+      TJson.ObjectToJsonString(Endereco);
   finally
     FreeAndNil(Endereco);
   end;

@@ -9,25 +9,30 @@ uses
 type
   TEndereco = class(TInterfacedObject)
   private
-    [JSONName('cep')]
     FCEP: String;
-    [JSONName('logradouro')]
     FLogradouro: String;
-    [JSONName('complemento')]
     FComplemento: String;
-    [JSONName('bairro')]
     FBairro: String;
-    [JSONName('localidade')]
     FLocalidade: String;
-    [JSONName('uf')]
     FUF: String;
   public
+    [JSONName('cep')]
     property CEP: String read FCEP write FCEP;
+    [JSONName('logradouro')]
     property Logradouro: String read FLogradouro write FLogradouro;
+    [JSONName('complemento')]
     property Complemento: String read FComplemento write FComplemento;
+    [JSONName('bairro')]
     property Bairro: String read FBairro write FBairro;
+    [JSONName('localidade')]
     property Localidade: String read FLocalidade write FLocalidade;
+    [JSONName('uf')]
     property UF: String read FUF write FUF;
+
+    { AwesomeAPI }
+    [JSONName('address')]
+    property Address: String write FLogradouro;
+
   end;
 
 implementation
