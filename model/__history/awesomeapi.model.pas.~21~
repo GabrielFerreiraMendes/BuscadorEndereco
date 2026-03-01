@@ -4,18 +4,21 @@ interface
 
 uses
   System.JSON, System.SysUtils, System.StrUtils, System.Variants,
-  REST.Types, REST.Client, REST.Json, endereco.dto;
+  REST.Types, REST.Client, REST.Json, endereco.intf;
 
 type
   TAwesomeApiModel = class
-    class function Consultar(Cep: String): WideString;
+    class function Consultar(Cep: String): TEndereco;
   end;
 
 implementation
 
+uses
+  awesomeapi.dto, IdHTTP;
+
 { TViaCepModel }
 
-class function TAwesomeApiModel.Consultar(Cep: String): WideString;
+class function TAwesomeApiModel.Consultar(Cep: String): TEndereco;
 const
   URL_CEP: String = 'https://cep.awesomeapi.com.br/json/{cep}';
   TIPO_JSON: String = 'application/json';
@@ -23,7 +26,6 @@ var
   RESTRequest: TRESTRequest;
   RESTClient: TRESTClient;
   RESTResponse: TRESTResponse;
-  JSONObject: TJSONObject;
   Erro:String;
 begin
   RESTClient := TRESTClient.Create(URL_CEP);
@@ -32,27 +34,33 @@ begin
   RESTRequest := TRESTRequest.Create(nil);
 
   try
-    RESTRequest.Client := RESTClient;
-    RESTRequest.Response := RESTResponse;
-    RESTRequest.Method := rmGet;
-    RESTRequest.Params.AddItem('cep', Cep, pkURLSEGMENT, [], ctNone);
-    RESTRequest.Execute;
+    try
+      RESTRequest.Client := RESTClient;
+      RESTRequest.Response := RESTResponse;
+      RESTRequest.Method := rmGet;
+      RESTRequest.Params.AddItem('cep', Cep, pkURLSEGMENT, [], ctNone);
+      RESTRequest.Execute;
+    except
+     on E: EIdHTTPProtocolException do
+     begin
+       if E.ErrorCode <> 200 then
+         Exit(nil);
+     end;
+    end;
 
     if RESTResponse.StatusCode <> 200 then
-      Exit(EmptyStr);
+      Exit(nil);
 
-    JSONObject := RESTResponse.JSONValue as TJSONObject;
-    JSONObject.TryGetValue<String>('erro', Erro);
+    TJSONObject(RESTResponse.JSONValue).TryGetValue<String>('erro', Erro);
 
     if not Trim(Erro).IsEmpty then
-      Exit(EmptyStr);
+      Exit(nil);
 
-    Result := JSONObject.ToJson;
+    Result := TJson.JsonToObject<TAwesomeApiDTO>(TJSONObject(RESTResponse.JSONValue));
   finally
     FreeAndNil(RESTClient);
     FreeAndNil(RESTResponse);
     FreeAndNil(RESTRequest);
-    JSONObject := nil;
   end;
 end;
 

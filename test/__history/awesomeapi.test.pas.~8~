@@ -1,0 +1,46 @@
+unit awesomeapi.test;
+
+interface
+
+uses
+  DUnitX.TestFramework, awesomeapi.model, endereco.intf;
+
+type
+  [TestFixture]
+  TAwesomeApiTest = class
+  public
+    [TestCase('Case 1', '22250040')]
+    [TestCase('Case 2', '75113135')]
+    [TestCase('Case 3', '60810160')]
+    [TestCase('Case 4', '87013110')]
+    procedure TestaCepValido(Cep: String);
+
+    [TestCase('Case 1', '11111111')]
+    [TestCase('Case 2', '22222222')]
+    [TestCase('Case 3', '33333333')]
+    [TestCase('Case 4', '44444444')]
+    procedure TestaCepInvalido(Cep: String);
+  end;
+
+implementation
+
+{ TAwesomeApiTest }
+
+procedure TAwesomeApiTest.TestaCepInvalido(Cep: String);
+var
+  ViaCep: TEndereco;
+begin
+  ViaCep := TAwesomeApiModel.Consultar(Trim(Cep));
+
+  Assert.IsFalse(Assigned(ViaCep));
+end;
+
+procedure TAwesomeApiTest.TestaCepValido(Cep: String);
+begin
+
+end;
+
+initialization
+  TDUnitX.RegisterTestFixture(TAwesomeApiTest);
+
+end.

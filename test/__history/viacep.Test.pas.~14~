@@ -1,0 +1,39 @@
+unit viacep.Test;
+
+interface
+
+uses
+  DUnitX.TestFramework, viacep.model, endereco.intf;
+
+type
+  [TestFixture]
+  TViaCepTest = class
+  public
+    [Test]
+    [TestCase('Case 1', '22250040')]
+    [TestCase('Case 2', '75113135')]
+    [TestCase('Case 3', '60810160')]
+    [TestCase('Case 3', '60810160')]
+    procedure TestaCep(Cep: String);
+  end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+{ TViaCepTest }
+
+procedure TViaCepTest.TestaCep(Cep: String);
+var
+  ViaCep: TEndereco;
+begin
+  ViaCep := TViaCepModel.Consultar(Trim(Cep));
+
+  Assert.IsTrue(Assigned(ViaCep));
+end;
+
+initialization
+  TDUnitX.RegisterTestFixture(TViaCepTest);
+
+end.

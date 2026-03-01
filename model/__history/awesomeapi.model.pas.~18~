@@ -8,14 +8,17 @@ uses
 
 type
   TAwesomeApiModel = class
-    class function Consultar(Cep: String): WideString;
+    class function Consultar(Cep: String): TEndereco;
   end;
 
 implementation
 
+uses
+  awesomeapi.dto;
+
 { TViaCepModel }
 
-class function TAwesomeApiModel.Consultar(Cep: String): WideString;
+class function TAwesomeApiModel.Consultar(Cep: String): TEndereco;
 const
   URL_CEP: String = 'https://cep.awesomeapi.com.br/json/{cep}';
   TIPO_JSON: String = 'application/json';
@@ -23,7 +26,6 @@ var
   RESTRequest: TRESTRequest;
   RESTClient: TRESTClient;
   RESTResponse: TRESTResponse;
-  JSONObject: TJSONObject;
   Erro:String;
 begin
   RESTClient := TRESTClient.Create(URL_CEP);
@@ -39,20 +41,18 @@ begin
     RESTRequest.Execute;
 
     if RESTResponse.StatusCode <> 200 then
-      Exit(EmptyStr);
+      Exit(nil);
 
-    JSONObject := RESTResponse.JSONValue as TJSONObject;
-    JSONObject.TryGetValue<String>('erro', Erro);
+    TJSONObject(RESTResponse.JSONValue).TryGetValue<String>('erro', Erro);
 
     if not Trim(Erro).IsEmpty then
-      Exit(EmptyStr);
+      Exit(nil);
 
-    Result := JSONObject.ToString;
+    Result := TJson.JsonToObject<TAwe> TJSONObject(RESTResponse.JSONValue).ToString;
   finally
     FreeAndNil(RESTClient);
     FreeAndNil(RESTResponse);
     FreeAndNil(RESTRequest);
-    JSONObject := nil;
   end;
 end;
 

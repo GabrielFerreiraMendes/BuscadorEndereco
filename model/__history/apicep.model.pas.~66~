@@ -25,7 +25,6 @@ const
 var
   Client: TNetHTTPClient;
   Response: IHTTPResponse;
-  Json: TJSONObject;
   CepRetorno: String;
 begin
   Client := TNetHTTPClient.Create(nil);
@@ -37,14 +36,14 @@ begin
     if Response.StatusCode <> 200 then
       Exit(nil);
 
-    Json := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(Response.ContentAsString), 0)
-    as TJSONObject;
+    TJSONObject(TJSONObject.ParseJSONValue(
+    TEncoding.ASCII.GetBytes(Response.ContentAsString), 0)
+    ).TryGetValue<String>('code', CepRetorno);
 
-    Json.TryGetValue<String>('code', CepRetorno);
     if CepRetorno.IsEmpty then
       Exit(nil);
 
-    Result := TJson.JsonToObject<TViaCepDTO>(Response.ContentAsString);
+    Result := TJson.JsonToObject<TApiCepDTO>(Response.ContentAsString);
   finally
     Client.Free;
     Response := nil;

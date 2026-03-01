@@ -8,14 +8,17 @@ uses
 
 type
   TAwesomeApiModel = class
-    class function Consultar(Cep: String): WideString;
+    class function Consultar(Cep: String): TEndereco;
   end;
 
 implementation
 
+uses
+  awesomeapi.dto, IdHTTP;
+
 { TViaCepModel }
 
-class function TAwesomeApiModel.Consultar(Cep: String): WideString;
+class function TAwesomeApiModel.Consultar(Cep: String): TEndereco;
 const
   URL_CEP: String = 'https://cep.awesomeapi.com.br/json/{cep}';
   TIPO_JSON: String = 'application/json';
@@ -31,21 +34,29 @@ begin
   RESTRequest := TRESTRequest.Create(nil);
 
   try
-    RESTRequest.Client := RESTClient;
-    RESTRequest.Response := RESTResponse;
-    RESTRequest.Method := rmGet;
-    RESTRequest.Params.AddItem('cep', Cep, pkURLSEGMENT, [], ctNone);
-    RESTRequest.Execute;
+    try
+      RESTRequest.Client := RESTClient;
+      RESTRequest.Response := RESTResponse;
+      RESTRequest.Method := rmGet;
+      RESTRequest.Params.AddItem('cep', Cep, pkURLSEGMENT, [], ctNone);
+      RESTRequest.Execute;
+    except
+     on E: EIdHTTPProtocolException do
+     begin
+       if E.ErrorCode = 404 then
+         Exit(nil);
+     end;
+    end;
 
     if RESTResponse.StatusCode <> 200 then
-      Exit(EmptyStr);
+      Exit(nil);
 
     TJSONObject(RESTResponse.JSONValue).TryGetValue<String>('erro', Erro);
 
     if not Trim(Erro).IsEmpty then
-      Exit(EmptyStr);
+      Exit(nil);
 
-    Result := TJSONObject(RESTResponse.JSONValue).ToString;
+    Result := TJson.JsonToObject<TAwesomeApiDTO>(TJSONObject(RESTResponse.JSONValue));
   finally
     FreeAndNil(RESTClient);
     FreeAndNil(RESTResponse);

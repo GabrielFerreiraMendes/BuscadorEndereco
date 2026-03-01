@@ -1,0 +1,19 @@
+unit awesomeapi.test;
+
+interface
+
+uses
+  DUnitX.TestFramework, awesomeapi.model, endereco.intf;
+
+type
+  [TestFixture]
+  TAwesomeApiTest = class
+  public
+  end;
+
+implementation
+
+initialization
+  TDUnitX.RegisterTestFixture(TAwesomeApiTest);
+
+end.
