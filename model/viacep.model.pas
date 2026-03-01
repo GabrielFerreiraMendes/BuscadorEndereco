@@ -4,7 +4,7 @@ interface
 
 uses
   System.JSON, System.SysUtils, System.StrUtils, System.Variants,
-  REST.Types, REST.Client, REST.Json, endereco.dto;
+  REST.Types, REST.Client, REST.Json, endereco.intf;
 
 type
   TViaCepModel = class(TInterfacedObject)
@@ -12,6 +12,9 @@ type
   end;
 
 implementation
+
+uses
+  viacep.dto;
 
 { TViaCepModel }
 
@@ -23,7 +26,6 @@ var
   RESTRequest: TRESTRequest;
   RESTClient: TRESTClient;
   RESTResponse: TRESTResponse;
-  JSONObject: TJSONObject;
   Erro:String;
 begin
   RESTClient := TRESTClient.Create(URL_CEP);
@@ -42,18 +44,16 @@ begin
     if RESTResponse.StatusCode <> 200 then
       Exit(nil);
 
-    JSONObject := RESTResponse.JSONValue as TJSONObject;
-    JSONObject.TryGetValue<String>('erro', Erro);
+    TJSONObject(RESTResponse.JSONValue).TryGetValue<String>('erro', Erro);
 
     if not Trim(Erro).IsEmpty then
       Exit(nil);
 
-    Result := TJson.JsonToObject<TEndereco>(JSONObject);
+    Result := TJson.JsonToObject<TViaCepDTO>(TJSONObject(RESTResponse.JSONValue));
   finally
     FreeAndNil(RESTClient);
     FreeAndNil(RESTResponse);
     FreeAndNil(RESTRequest);
-    JSONObject := nil;
   end;
 end;
 

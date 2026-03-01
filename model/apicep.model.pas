@@ -4,7 +4,7 @@ interface
 
 uses
   System.JSON, System.SysUtils, System.StrUtils, System.Variants,
-  REST.Types, REST.Client, REST.Json, endereco.dto, System.Net.HttpClient,
+  REST.Types, REST.Client, REST.Json, endereco.intf, System.Net.HttpClient,
   System.Net.URLClient, System.Net.HttpClientComponent, System.MaskUtils;
 
 type
@@ -14,16 +14,18 @@ type
 
 implementation
 
+uses
+  apicep.dto;
+
 { TViaCepModel }
 
 class function TVApiCepModel.Consultar(Cep: String): TEndereco;
 const
   URL_CEP: String = 'https://cdn.apicep.com/file/apicep/{cep}.json';
-  TIPO_JSON: String = 'application/json';
 var
   Client: TNetHTTPClient;
   Response: IHTTPResponse;
-  JSONValue: TJSONValue;
+  CepRetorno: String;
 begin
   Client := TNetHTTPClient.Create(nil);
 
@@ -34,12 +36,17 @@ begin
     if Response.StatusCode <> 200 then
       Exit(nil);
 
-    JSONValue := TJSONObject.ParseJSONValue(Response.ContentAsString);
-//    Result := TJson.JsonToObject<TEndereco>(TJSONObject(JSONValue));
+    TJSONObject(TJSONObject.ParseJSONValue(
+    TEncoding.ASCII.GetBytes(Response.ContentAsString), 0)
+    ).TryGetValue<String>('code', CepRetorno);
+
+    if CepRetorno.IsEmpty then
+      Exit(nil);
+
+    Result := TJson.JsonToObject<TApiCepDTO>(Response.ContentAsString);
   finally
-    Client := nil;
+    Client.Free;
     Response := nil;
-    JSONValue := nil;
   end;
 end;
 

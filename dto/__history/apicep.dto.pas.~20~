@@ -1,0 +1,42 @@
+unit apicep.dto;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants,
+  REST.Types, REST.Client, REST.Json, REST.Json.Types, endereco.dto;
+
+type
+  TViaCepDTO = class(TInterfacedObject, TEndereco)
+  private
+    FCode: String;
+    FState: String;
+    FCity: String;
+    FDistrict: String;
+    FAddress: String;
+  public
+    function ToJson: String;
+
+    [JSONName('code')]
+    property Code: String read FCode write FCode;
+    [JSONName('state')]
+    property State: String read FState write FState;
+    [JSONName('address')]
+    property Address: String read FAddress write FAddress;
+    [JSONName('district')]
+    property District: String read FDistrict write FDistrict;
+
+    [JSONName('city')]
+    property City: String read FCity write FCity;
+  end;
+
+implementation
+
+{ TViaCepDTO }
+
+function TViaCepDTO.ToJson: String;
+begin
+  Result := TJson.Format(TJson.ObjectToJsonObject(Self));
+end;
+
+end.

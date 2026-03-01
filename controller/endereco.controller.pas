@@ -3,7 +3,7 @@ unit endereco.controller;
 interface
 
 uses
-  endereco.model, endereco.dto;
+  endereco.model, endereco.intf;
 
 type
   TEnderecoController = class

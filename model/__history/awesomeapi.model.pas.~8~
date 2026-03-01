@@ -1,0 +1,59 @@
+unit awesomeapi.model;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants,
+  REST.Types, REST.Client, REST.Json, endereco.dto;
+
+type
+  TAwesomeApiModel = class
+    class function Consultar(Cep: String): WideString;
+  end;
+
+implementation
+
+{ TViaCepModel }
+
+class function TAwesomeApiModel.Consultar(Cep: String): WideString;
+const
+  URL_CEP: String = 'https://cep.awesomeapi.com.br/json/{cep}';
+  TIPO_JSON: String = 'application/json';
+var
+  RESTRequest: TRESTRequest;
+  RESTClient: TRESTClient;
+  RESTResponse: TRESTResponse;
+  JSONObject: TJSONObject;
+  Erro:String;
+begin
+  RESTClient := TRESTClient.Create(URL_CEP);
+  RESTResponse := TRESTResponse.Create(nil);
+  RESTResponse.ContentType := TIPO_JSON;
+  RESTRequest := TRESTRequest.Create(nil);
+
+  try
+    RESTRequest.Client := RESTClient;
+    RESTRequest.Response := RESTResponse;
+    RESTRequest.Method := rmGet;
+    RESTRequest.Params.AddItem('cep', Cep, pkURLSEGMENT, [], ctNone);
+    RESTRequest.Execute;
+
+    if RESTResponse.StatusCode <> 200 then
+      Exit(nil);
+
+    JSONObject := RESTResponse.JSONValue as TJSONObject;
+    JSONObject.TryGetValue<String>('erro', Erro);
+
+    if not Trim(Erro).IsEmpty then
+      Exit(nil);
+
+    Result := JSONObject.ToJson;
+  finally
+    FreeAndNil(RESTClient);
+    FreeAndNil(RESTResponse);
+    FreeAndNil(RESTRequest);
+    JSONObject := nil;
+  end;
+end;
+
+end.

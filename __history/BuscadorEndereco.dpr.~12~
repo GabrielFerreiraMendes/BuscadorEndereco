@@ -1,0 +1,24 @@
+program BuscadorEndereco;
+
+uses
+  Vcl.Forms,
+  endereco.view in 'view\endereco.view.pas' {Form1},
+  endereco.model in 'model\endereco.model.pas',
+  endereco.controller in 'controller\endereco.controller.pas',
+  endereco.intf in 'interface\endereco.intf.pas',
+  viacep.model in 'model\viacep.model.pas',
+  apicep.model in 'model\apicep.model.pas',
+  awesomeapi.model in 'model\awesomeapi.model.pas',
+  viacep.dto in 'dto\viacep.dto.pas',
+  apicep.dto in 'dto\apicep.dto.pas',
+  awesomeapi.dto in 'dto\awesomeapi.dto.pas';
+
+{$R *.res}
+
+begin
+  ReportMemoryLeaksOnShutdown:=true;
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

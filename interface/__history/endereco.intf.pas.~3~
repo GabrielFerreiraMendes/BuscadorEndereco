@@ -1,0 +1,13 @@
+unit endereco.intf;
+
+interface
+
+type
+  TEndereco = interface
+    function ToJSON: String;
+    procedure Destroy;
+  end;
+
+implementation
+
+end.

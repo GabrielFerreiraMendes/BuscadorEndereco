@@ -128,9 +128,13 @@
         </DCCReference>
         <DCCReference Include="model\endereco.model.pas"/>
         <DCCReference Include="controller\endereco.controller.pas"/>
-        <DCCReference Include="dto\endereco.dto.pas"/>
+        <DCCReference Include="interface\endereco.intf.pas"/>
         <DCCReference Include="model\viacep.model.pas"/>
         <DCCReference Include="model\apicep.model.pas"/>
+        <DCCReference Include="model\awesomeapi.model.pas"/>
+        <DCCReference Include="dto\viacep.dto.pas"/>
+        <DCCReference Include="dto\apicep.dto.pas"/>
+        <DCCReference Include="dto\awesomeapi.dto.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

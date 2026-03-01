@@ -4,18 +4,18 @@ interface
 
 uses
   System.JSON, System.SysUtils, System.StrUtils, System.Variants,
-  REST.Types, REST.Client, REST.Json, endereco.dto;
+  REST.Types, REST.Client, REST.Json, endereco.intf;
 
 type
   TAwesomeApiModel = class
-    class function Consultar(Cep: String): TEndereco;
+    class function Consultar(Cep: String): WideString;
   end;
 
 implementation
 
 { TViaCepModel }
 
-class function TAwesomeApiModel.Consultar(Cep: String): TEndereco;
+class function TAwesomeApiModel.Consultar(Cep: String): WideString;
 const
   URL_CEP: String = 'https://cep.awesomeapi.com.br/json/{cep}';
   TIPO_JSON: String = 'application/json';
@@ -23,7 +23,6 @@ var
   RESTRequest: TRESTRequest;
   RESTClient: TRESTClient;
   RESTResponse: TRESTResponse;
-  JSONObject: TJSONObject;
   Erro:String;
 begin
   RESTClient := TRESTClient.Create(URL_CEP);
@@ -39,20 +38,18 @@ begin
     RESTRequest.Execute;
 
     if RESTResponse.StatusCode <> 200 then
-      Exit(nil);
+      Exit(EmptyStr);
 
-    JSONObject := RESTResponse.JSONValue as TJSONObject;
-    JSONObject.TryGetValue<String>('erro', Erro);
+    TJSONObject(RESTResponse.JSONValue).TryGetValue<String>('erro', Erro);
 
     if not Trim(Erro).IsEmpty then
-      Exit(nil);
+      Exit(EmptyStr);
 
-//    Result := TJson.JsonToObject<TEndereco>(JSONObject);
+    Result := TJSONObject(RESTResponse.JSONValue).ToString;
   finally
     FreeAndNil(RESTClient);
     FreeAndNil(RESTResponse);
     FreeAndNil(RESTRequest);
-    JSONObject := nil;
   end;
 end;
 

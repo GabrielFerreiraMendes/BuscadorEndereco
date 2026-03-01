@@ -1,0 +1,59 @@
+unit awesomeapi.dto;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants,
+  REST.Types, REST.Client, REST.Json, REST.Json.Types, endereco.dto;
+
+type
+  TAwesomeApiDTO = class(TInterfacedObject, TEndereco)
+  private
+    FCep: String;
+    FAddressType: String;
+    FAddressName: String;
+    FAddress: String;
+    FState: String;
+    FDistrict: String;
+    FLatitude: String;
+    FLongitude: String;
+    FCity: String;
+    FCityIbge: String;
+    FDdd: String;
+  public
+    function ToJson: String;
+
+    [JSONName('cep')]
+    property Cep: String read FCep write FCep;
+    [JSONName('address_type')]
+    property AddressType: String read FAddressType write FAddressType;
+    [JSONName('address_name')]
+    property AddressName: String read FAddressName write FAddressName;
+    [JSONName('address')]
+    property Address: String read FAddress write FAddress;
+    [JSONName('state')]
+    property State: String read FState write FState;
+    [JSONName('district')]
+    property District: String read FDistrict write FDistrict;
+    [JSONName('lat')]
+    property Latitude: String read FLatitude write FLatitude;
+    [JSONName('lng')]
+    property Longitude: String read FLongitude write FLongitude;
+    [JSONName('city')]
+    property City: String read FCity write FCity;
+    [JSONName('city_ibge')]
+    property CityIbge: String read FCityIbge write FCityIbge;
+    [JSONName('ddd')]
+    property Ddd: String read FDdd write FDdd;
+  end;
+
+implementation
+
+{ TAwesomeApiDTO }
+
+function TAwesomeApiDTO.ToJson: String;
+begin
+  Result := TJson.Format(TJson.ObjectToJsonObject(Self));
+end;
+
+end.

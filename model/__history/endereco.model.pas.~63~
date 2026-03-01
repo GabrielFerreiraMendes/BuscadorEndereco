@@ -1,0 +1,37 @@
+unit endereco.model;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants,
+  REST.Types, REST.Client, REST.Json, endereco.dto;
+
+type
+  TEnderecoModel = class(TInterfacedObject)
+    class function ConsultarEndereco(Cep: String): WideString;
+  end;
+
+implementation
+
+uses
+  viacep.model, apicep.model, awesomeapi.model;
+
+{ TEndereco }
+
+class function TEnderecoModel.ConsultarEndereco(Cep: String): WideString;
+var
+  Resultado: WideString;
+begin
+  Resultado := TViaCepModel.Consultar(Cep);
+
+  if Resultado.Equals(EmptyStr) then
+    Resultado := TVApiCepModel.Consultar(Cep);
+
+  if Resultado.Equals(EmptyStr) then
+    Resultado := TAwesomeApiModel.Consultar(Cep);
+
+
+  Result := UTF8Encode(Resultado);
+end;
+
+end.

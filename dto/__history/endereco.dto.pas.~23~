@@ -1,0 +1,16 @@
+unit endereco.dto;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants,
+  REST.Types, REST.Client, REST.Json, REST.Json.Types;
+
+type
+  TEndereco = class(TInterfacedObject)
+    function ToJSON: String;
+  end;
+
+implementation
+
+end.

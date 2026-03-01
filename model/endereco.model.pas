@@ -4,7 +4,7 @@ interface
 
 uses
   System.JSON, System.SysUtils, System.StrUtils, System.Variants,
-  REST.Types, REST.Client, REST.Json, endereco.dto;
+  REST.Types, REST.Client, REST.Json, endereco.intf;
 
 type
   TEnderecoModel = class(TInterfacedObject)
@@ -20,16 +20,15 @@ uses
 
 class function TEnderecoModel.ConsultarEndereco(Cep: String): TEndereco;
 begin
-  if SameText(Trim(Cep), EmptyStr) then
-    raise Exception.Create('Cep inválido ou em branco!');
-
   Result := TViaCepModel.Consultar(Cep);
 
-  if Result = nil then
+  if Result= nil then
     Result := TVApiCepModel.Consultar(Cep);
 
-  if Result = nil then
-    Result := TAwesomeApiModel.Consultar(Cep);
+  if Result= nil then
+//    Resultado := TAwesomeApiModel.Consultar(Cep);
+
+//  Result := UTF8Encode(Resultado);
 end;
 
 end.

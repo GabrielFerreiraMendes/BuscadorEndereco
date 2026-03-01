@@ -1,0 +1,65 @@
+unit viacep.dto;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants,
+  REST.Types, REST.Client, REST.Json, REST.Json.Types, endereco.intf;
+
+type
+  TViaCepDTO = class(TInterfacedObject, TEndereco)
+  private
+    FCEP: String;
+    FLogradouro: String;
+    FComplemento: String;
+    FUnidade: String;
+    FBairro: String;
+    FLocalidade: String;
+    FUF: String;
+    FEstado: String;
+    FRegiao: String;
+    FIbge: String;
+    FGia: String;
+    FDdd: String;
+    FSiafi: String;
+  public
+    function ToJson: String;
+
+    [JSONName('cep')]
+    property CEP: String read FCEP write FCEP;
+    [JSONName('logradouro')]
+    property Logradouro: String read FLogradouro write FLogradouro;
+    [JSONName('complemento')]
+    property Complemento: String read FComplemento write FComplemento;
+    [JSONName('unidade')]
+    property Unidade: String read FUnidade write FUnidade;
+    [JSONName('bairro')]
+    property Bairro: String read FBairro write FBairro;
+    [JSONName('localidade')]
+    property Localidade: String read FLocalidade write FLocalidade;
+    [JSONName('uf')]
+    property UF: String read FUF write FUF;
+    [JSONName('estado')]
+    property Estado: String read FEstado write FEstado;
+    [JSONName('regiao')]
+    property Regiao: String read FRegiao write FRegiao;
+    [JSONName('ibge')]
+    property Ibge: String read FIbge write FIbge;
+    [JSONName('gia')]
+    property Gia: String read FGia write FGia;
+    [JSONName('ddd')]
+    property Ddd: String read FDdd write FDdd;
+    [JSONName('siafi')]
+    property Siafi: String read FSiafi write FSiafi;
+  end;
+
+implementation
+
+{ TViaCepDTO }
+
+function TViaCepDTO.ToJson: String;
+begin
+  Result := TJson.ObjectToJsonObject(Self).Format;
+end;
+
+end.

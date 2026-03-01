@@ -4,8 +4,8 @@
     <Transaction>2024/10/03 12:23:53.000.881,=C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2024/11/08 16:17:46.000.561,=C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2026/02/27 14:16:13.000.173,=C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2026/02/27 14:22:55.000.950,C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\view\principal.view.dfm</Transaction>
     <Transaction>2026/02/27 14:22:55.000.950,C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\view\principal.view.pas</Transaction>
+    <Transaction>2026/02/27 14:22:55.000.950,C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\view\principal.view.dfm</Transaction>
     <Transaction>2026/02/27 14:23:11.000.340,C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\BuscadorEndereco.dproj</Transaction>
     <Transaction>2026/02/27 14:23:38.000.339,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
     <Transaction>2026/02/27 14:36:58.000.132,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\model\endereco.model.pas</Transaction>
@@ -13,9 +13,20 @@
     <Transaction>2026/02/27 14:50:31.000.307,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\controller\endereco.controller.pas</Transaction>
     <Transaction>2026/02/27 15:01:48.000.434,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
     <Transaction>2026/02/27 15:02:42.000.153,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\dto\endereco.dto.pas</Transaction>
-    <Transaction>2026/02/28 16:06:17.697,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
-    <Transaction>2026/02/28 16:08:02.466,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\model\viacep.model.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
-    <Transaction>2026/02/28 16:10:37.115,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
-    <Transaction>2026/02/28 16:12:04.014,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\model\apicep.model.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/02/28 16:06:17.000.697,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/02/28 16:08:02.000.466,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\model\viacep.model.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/02/28 16:10:37.000.115,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/02/28 16:12:04.000.014,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\model\apicep.model.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/02/28 17:36:15.000.136,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/02/28 17:37:32.000.989,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\model\awesomeapi.model.pas</Transaction>
+    <Transaction>2026/02/28 18:06:48.000.623,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/02/28 18:08:04.000.873,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\dto\viacep.dto.pas</Transaction>
+    <Transaction>2026/02/28 18:15:21.000.535,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\dto\viacep.dto.pas=</Transaction>
+    <Transaction>2026/03/01 00:39:33.000.259,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\dto\viacep.dto.pas</Transaction>
+    <Transaction>2026/03/01 00:55:22.000.178,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/03/01 00:56:59.000.021,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/03/01 00:57:38.000.564,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\dto\apicep.dto.pas</Transaction>
+    <Transaction>2026/03/01 11:25:28.071,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
+    <Transaction>2026/03/01 11:27:06.946,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\dto\awesomeapi.dto.pas=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>
