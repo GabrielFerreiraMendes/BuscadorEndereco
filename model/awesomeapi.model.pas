@@ -26,7 +26,7 @@ var
   RESTRequest: TRESTRequest;
   RESTClient: TRESTClient;
   RESTResponse: TRESTResponse;
-  Erro:String;
+  Codigo:String;
 begin
   RESTClient := TRESTClient.Create(URL_CEP);
   RESTResponse := TRESTResponse.Create(nil);
@@ -35,6 +35,7 @@ begin
 
   try
     try
+      //Monta a consulta rest ao endpoint
       RESTRequest.Client := RESTClient;
       RESTRequest.Response := RESTResponse;
       RESTRequest.Method := rmGet;
@@ -43,17 +44,22 @@ begin
     except
      on E: EIdHTTPProtocolException do
      begin
+       //Quando ocorre o erro na requisição é validado se o status é 404
+       //o erro é abafado pelo except e o método retorna nil
        if E.ErrorCode = 404 then
          Exit(nil);
      end;
     end;
 
+    //Qualquer status diferente de 200 compromete a serialização, então é retornado nil
     if RESTResponse.StatusCode <> 200 then
       Exit(nil);
 
-    TJSONObject(RESTResponse.JSONValue).TryGetValue<String>('erro', Erro);
+    //Consulta o campo código para validar se encontrou o endereço
+    TJSONObject(RESTResponse.JSONValue).TryGetValue<String>('code', Codigo);
 
-    if not Trim(Erro).IsEmpty then
+    //Quando não encontra o endereço o 'code' é igual a 'not_found'
+    if not Trim(Codigo).Equals('not_found') then
       Exit(nil);
 
     Result := TJson.JsonToObject<TAwesomeApiDTO>(TJSONObject(RESTResponse.JSONValue));

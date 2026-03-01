@@ -20,15 +20,15 @@ uses
 
 class function TEnderecoModel.ConsultarEndereco(Cep: String): TEndereco;
 begin
+  //Realiza a consulta e caso não consiga consultar o
+  //endereço tenta a consulta no próximo endpoint
   Result := TViaCepModel.Consultar(Cep);
 
-  if Result= nil then
+  if Result = nil then
     Result := TVApiCepModel.Consultar(Cep);
 
-  if Result= nil then
-//    Resultado := TAwesomeApiModel.Consultar(Cep);
-
-//  Result := UTF8Encode(Resultado);
+  if Result = nil then
+    Result := TAwesomeApiModel.Consultar(Cep);
 end;
 
 end.

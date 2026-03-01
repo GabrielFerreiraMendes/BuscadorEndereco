@@ -33,20 +33,22 @@ begin
     Client.UserAgent := 'BuscadorEndereco/1.0 (Windows NT 10.0)';
     Response := Client.Get(URL_CEP.Replace('{cep}', FormatMaskText('00000\-000;0;', cep)));
 
+    //Qualquer status diferente de 200 compromete a serialização, então é retornado nil
     if Response.StatusCode <> 200 then
       Exit(nil);
 
+    //Consulta a o campo code que é o cep para verificar se o retornado é mesmo um endereço
     TJSONObject(TJSONObject.ParseJSONValue(
     TEncoding.ASCII.GetBytes(Response.ContentAsString), 0)
     ).TryGetValue<String>('code', CepRetorno);
 
+    //Se não encontrar o cep no json, retorna nil para evitar erro na serialização
     if CepRetorno.IsEmpty then
       Exit(nil);
 
     Result := TJson.JsonToObject<TApiCepDTO>(Response.ContentAsString);
   finally
     Client.Free;
-    Response := nil;
   end;
 end;
 

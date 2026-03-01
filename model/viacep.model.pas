@@ -34,6 +34,7 @@ begin
   RESTRequest := TRESTRequest.Create(nil);
 
   try
+    //Monta a consulta rest ao endpoint
     RESTRequest.Client := RESTClient;
     RESTRequest.Response := RESTResponse;
     RESTRequest.Method := rmGet;
@@ -41,11 +42,15 @@ begin
     RESTRequest.Params.AddItem('type', 'json', pkURLSEGMENT, [], ctNone);
     RESTRequest.Execute;
 
+    //Qualquer status diferente de 200 compromete a serialização, então é retornado nil
     if RESTResponse.StatusCode <> 200 then
       Exit(nil);
 
+    //Quando não encontra o CEP o endpoint retorna uma mensagem de erro,
+    //aqui valida se o campo existe no json
     TJSONObject(RESTResponse.JSONValue).TryGetValue<String>('erro', Erro);
 
+    //Se for um json de erro é retornado nil
     if not Trim(Erro).IsEmpty then
       Exit(nil);
 

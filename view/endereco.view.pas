@@ -42,6 +42,10 @@ begin
 
   Memo1.Clear;
   Endereco := TEnderecoController.ConsultaEndereco(edtCep.Text);
+
+  if Endereco = nil then
+    Exit;
+
   Memo1.Lines.Add(Endereco.ToJSON);
 end;
 

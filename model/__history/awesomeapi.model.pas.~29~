@@ -1,0 +1,69 @@
+unit awesomeapi.model;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants,
+  REST.Types, REST.Client, REST.Json, endereco.intf;
+
+type
+  TAwesomeApiModel = class
+    class function Consultar(Cep: String): TEndereco;
+  end;
+
+implementation
+
+uses
+  awesomeapi.dto, IdHTTP;
+
+{ TViaCepModel }
+
+class function TAwesomeApiModel.Consultar(Cep: String): TEndereco;
+const
+  URL_CEP: String = 'https://cep.awesomeapi.com.br/json/{cep}';
+  TIPO_JSON: String = 'application/json';
+var
+  RESTRequest: TRESTRequest;
+  RESTClient: TRESTClient;
+  RESTResponse: TRESTResponse;
+  Codigo:String;
+begin
+  RESTClient := TRESTClient.Create(URL_CEP);
+  RESTResponse := TRESTResponse.Create(nil);
+  RESTResponse.ContentType := TIPO_JSON;
+  RESTRequest := TRESTRequest.Create(nil);
+
+  try
+    try
+      //Monta a consulta rest ao endpoint
+      RESTRequest.Client := RESTClient;
+      RESTRequest.Response := RESTResponse;
+      RESTRequest.Method := rmGet;
+      RESTRequest.Params.AddItem('cep', Cep, pkURLSEGMENT, [], ctNone);
+      RESTRequest.Execute;
+    except
+     on E: EIdHTTPProtocolException do
+     begin
+       if E.ErrorCode = 404 then
+         Exit(nil);
+     end;
+    end;
+
+    //Qualquer status diferente de 200 compromete a serialização, então é retornado nil
+    if RESTResponse.StatusCode <> 200 then
+      Exit(nil);
+
+    TJSONObject(RESTResponse.JSONValue).TryGetValue<String>('code', Codigo);
+
+    if not Trim(Codigo).Equals('not_found') then
+      Exit(nil);
+
+    Result := TJson.JsonToObject<TAwesomeApiDTO>(TJSONObject(RESTResponse.JSONValue));
+  finally
+    FreeAndNil(RESTClient);
+    FreeAndNil(RESTResponse);
+    FreeAndNil(RESTRequest);
+  end;
+end;
+
+end.
