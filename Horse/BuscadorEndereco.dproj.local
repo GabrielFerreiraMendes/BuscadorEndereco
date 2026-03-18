@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/10/03 12:23:53.000.881,=C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/11/08 16:17:46.000.561,=C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/03/18 10:55:33.869,C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\Horse\BuscadorEndereco.dproj=C:\Users\Gabriel\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2026/03/18 10:55:57.971,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\controller\endereco.controller.pas</Transaction>
+    <Transaction>2026/03/18 10:56:19.911,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\model\endereco.model.pas</Transaction>
+    <Transaction>2026/03/18 10:56:32.141,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\interface\endereco.intf.pas</Transaction>
+    <Transaction>2026/03/18 10:56:59.934,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\model\apicep.model.pas</Transaction>
+    <Transaction>2026/03/18 10:57:00.357,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\model\awesomeapi.model.pas</Transaction>
+    <Transaction>2026/03/18 10:57:00.412,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\model\viacep.model.pas</Transaction>
+    <Transaction>2026/03/18 10:57:11.878,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\dto\apicep.dto.pas</Transaction>
+    <Transaction>2026/03/18 10:57:11.894,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\dto\awesomeapi.dto.pas</Transaction>
+    <Transaction>2026/03/18 10:57:11.925,=C:\Users\Gabriel\OneDrive\Documentos\BuscadorEndereco\dto\viacep.dto.pas</Transaction>
+  </Transactions>
+</BorlandProject>

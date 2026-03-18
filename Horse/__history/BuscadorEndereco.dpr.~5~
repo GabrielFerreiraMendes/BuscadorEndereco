@@ -1,0 +1,34 @@
+program BuscadorEndereco;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils,
+  Horse,
+  endereco.controller in '..\controller\endereco.controller.pas',
+  endereco.model in '..\model\endereco.model.pas',
+  endereco.intf in '..\interface\endereco.intf.pas',
+  apicep.model in '..\model\apicep.model.pas',
+  awesomeapi.model in '..\model\awesomeapi.model.pas',
+  viacep.model in '..\model\viacep.model.pas',
+  apicep.dto in '..\dto\apicep.dto.pas',
+  awesomeapi.dto in '..\dto\awesomeapi.dto.pas',
+  viacep.dto in '..\dto\viacep.dto.pas';
+
+
+var
+  endereco: TEndereco;
+  cep: String;
+begin
+  THorse.Get('/cep/:id',
+    procedure(Req: THorseRequest; Res: THorseResponse)
+    begin
+      cep := Req.Params['id'];
+      endereco := TEnderecoController.ConsultaEndereco(cep);
+      Res.Send(endereco.ToJSON);
+    end);
+
+  THorse.Listen(9000);
+end.
